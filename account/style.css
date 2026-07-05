@@ -1,0 +1,437 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Armenian:wght@700;900&family=Noto+Sans+Armenian:wght@400;600;700;900&display=swap');
+
+:root{
+  --bg:#f7f1e6;
+  --paper:#fffaf2;
+  --navy:#06264b;
+  --dark:#001f3f;
+  --gold:#e0a72f;
+  --muted:#667184;
+  --line:rgba(6,38,75,.12);
+  --green:#1f9d55;
+  --yellow:#d9981e;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--navy);
+  font-family:"Noto Sans Armenian",Arial,sans-serif;
+  display:grid;
+  grid-template-columns:300px 1fr;
+  min-height:100vh;
+}
+
+.sidebar{
+  background:var(--dark);
+  color:#fff;
+  padding:28px;
+  position:sticky;
+  top:0;
+  height:100vh;
+}
+.brand img{width:150px;filter:brightness(0) invert(1);margin-bottom:38px}
+.menu{display:grid;gap:12px}
+.menu button{
+  border:0;
+  background:transparent;
+  color:rgba(255,255,255,.68);
+  text-align:left;
+  padding:16px 18px;
+  border-radius:16px;
+  font:inherit;
+  font-weight:900;
+  cursor:pointer;
+}
+.menu button.active{
+  background:var(--gold);
+  color:var(--navy);
+}
+.logout{
+  position:absolute;
+  bottom:28px;
+  left:28px;
+  right:28px;
+  padding:16px;
+  border:1px solid rgba(255,255,255,.16);
+  border-radius:16px;
+  color:rgba(255,255,255,.72);
+}
+
+.main{padding:36px 46px 80px}
+.top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:38px;
+}
+.top span{
+  color:var(--gold);
+  font-weight:900;
+  letter-spacing:.16em;
+}
+h1,h2{
+  font-family:"Noto Serif Armenian",serif;
+  margin:0;
+}
+h1{font-size:54px}
+.user{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-radius:20px;
+  padding:12px 18px;
+}
+.avatar{
+  width:48px;
+  height:48px;
+  border-radius:50%;
+  background:var(--gold);
+  display:grid;
+  place-items:center;
+  font-weight:900;
+}
+.user small{display:block;color:var(--muted);margin-top:4px}
+
+.page{display:none}
+.page.active{display:block}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
+  margin-bottom:28px;
+}
+.stats div,.panel,.order-card,.file-card,.profile-form{
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-radius:26px;
+  padding:26px;
+  box-shadow:0 16px 40px rgba(6,38,75,.06);
+}
+.stats b{
+  display:block;
+  font-size:34px;
+  color:var(--gold);
+}
+.stats span{color:var(--muted)}
+
+.grid{
+  display:grid;
+  grid-template-columns:1.5fr .8fr;
+  gap:24px;
+}
+.panel h2,.panel h3{margin-bottom:18px}
+.order-head{
+  display:flex;
+  justify-content:space-between;
+  gap:18px;
+  align-items:flex-start;
+}
+.order-head p,.section-head p,.file-card p,.panel p{
+  color:var(--muted);
+  line-height:1.6;
+}
+
+.badge{
+  padding:8px 14px;
+  border-radius:999px;
+  font-size:13px;
+  font-weight:900;
+  white-space:nowrap;
+}
+.badge.yellow{background:#fff1c9;color:#9b6815}
+.badge.green{background:#e4f7ea;color:#197a41}
+
+.timeline{
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  gap:14px;
+  margin-top:30px;
+}
+.timeline.detailed{
+  grid-template-columns:repeat(4,1fr);
+}
+.timeline div{
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:18px;
+  text-align:center;
+  color:var(--muted);
+}
+.timeline b{
+  width:36px;
+  height:36px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:#e9edf3;
+  margin:0 auto 10px;
+}
+.timeline .done b{background:var(--green);color:#fff}
+.timeline .current{
+  border-color:var(--gold);
+  color:var(--navy);
+}
+.timeline .current b{background:var(--gold);color:var(--navy)}
+
+.pay-line,.history,.row{
+  display:flex;
+  justify-content:space-between;
+  gap:16px;
+  margin:16px 0;
+}
+button{
+  background:var(--gold);
+  color:var(--navy);
+  border:0;
+  border-radius:14px;
+  padding:14px 22px;
+  font-weight:900;
+  cursor:pointer;
+}
+button.ghost{
+  background:#fff;
+  border:1px solid var(--line);
+}
+.section-head{margin-bottom:24px}
+.orders-list{
+  display:grid;
+  gap:16px;
+  margin-bottom:24px;
+}
+.order-card{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  cursor:pointer;
+}
+.order-card.selected{border-color:var(--gold)}
+.order-card h3{margin:0}
+.order-card p{margin:8px 0 0;color:var(--muted)}
+
+.actions{
+  display:flex;
+  gap:14px;
+  margin-top:24px;
+}
+
+.library-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:22px;
+}
+.file-card{text-align:center}
+.file-icon{
+  width:78px;
+  height:78px;
+  border-radius:22px;
+  background:#fff;
+  border:1px solid var(--line);
+  display:grid;
+  place-items:center;
+  font-size:34px;
+  margin:0 auto 18px;
+}
+.payment-layout{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:24px;
+}
+.big-price{
+  font-size:48px;
+  color:var(--gold);
+  font-weight:900;
+}
+.payment-buttons{
+  display:flex;
+  gap:14px;
+  margin-top:20px;
+}
+.profile-form{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:18px;
+  max-width:900px;
+}
+.profile-form label{
+  font-weight:900;
+}
+input{
+  width:100%;
+  margin-top:8px;
+  padding:15px 16px;
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:#fff;
+  font:inherit;
+  color:var(--navy);
+}
+.profile-form button{grid-column:1/-1}
+
+@media(max-width:1100px){
+  body{grid-template-columns:1fr}
+  .sidebar{
+    position:relative;
+    height:auto;
+  }
+  .logout{position:static;margin-top:24px}
+  .main{padding:28px 20px}
+  .stats,.grid,.library-grid,.payment-layout,.profile-form{grid-template-columns:1fr}
+  .timeline,.timeline.detailed{grid-template-columns:1fr 1fr}
+}
+
+header img,.brand img{height:60px;max-width:170px;object-fit:contain}
+
+.account-top-nav{
+  height:86px;background:rgba(255,253,248,.96);border-bottom:1px solid var(--line);
+  display:flex;align-items:center;justify-content:space-between;padding:0 34px;position:sticky;top:0;z-index:20
+}
+.account-top-nav img{height:58px;object-fit:contain}
+.account-top-nav nav{display:flex;gap:30px;font-weight:900}
+.account-top-nav nav a{text-decoration:none;color:var(--navy)}
+.account-pill{background:var(--gold);color:var(--navy);padding:14px 24px;border-radius:999px;text-decoration:none;font-weight:900}
+.sidebar{top:86px;height:calc(100vh - 86px)}
+@media(max-width:900px){.account-top-nav nav{display:none}.sidebar{top:0;height:auto}}
+
+.timeline.five-step{grid-template-columns:repeat(5,1fr)}
+@media(max-width:1100px){.timeline.five-step{grid-template-columns:repeat(2,1fr)}}
+
+/* V4 account layout fix */
+body{
+  display:block !important;
+  min-height:100vh;
+  overflow-x:hidden;
+}
+.account-top-nav{
+  position:sticky;
+  top:0;
+  left:0;
+  right:0;
+  z-index:50;
+}
+.sidebar{
+  position:fixed !important;
+  top:86px !important;
+  left:0;
+  width:300px;
+  height:calc(100vh - 86px) !important;
+  overflow:auto;
+}
+.main{
+  margin-left:300px;
+  min-height:calc(100vh - 86px);
+}
+@media(max-width:900px){
+  .sidebar{position:relative!important;top:0!important;width:100%;height:auto!important}
+  .main{margin-left:0}
+}
+
+/* V5 timeline product-aware */
+.timeline.five-step{
+  grid-template-columns:repeat(6,1fr);
+}
+.timeline.five-step div{
+  min-height:150px;
+}
+.timeline.five-step span{
+  font-weight:800;
+}
+@media(max-width:1200px){
+  .timeline.five-step{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:700px){
+  .timeline.five-step{grid-template-columns:1fr}
+}
+
+/* === FINAL ACCOUNT PHONE POLISH === */
+html,body{max-width:100%;overflow-x:hidden!important;}
+*{box-sizing:border-box;}
+@media(max-width:700px){
+  .account-top-nav{
+    height:auto!important;
+    padding:10px 14px!important;
+    gap:10px!important;
+    align-items:center!important;
+  }
+  .account-top-nav img{height:54px!important;max-width:95px!important;}
+  .account-pill{padding:11px 16px!important;font-size:13px!important;white-space:nowrap!important;}
+  .sidebar{padding:22px 18px!important;overflow:hidden!important;}
+  .brand img{width:120px!important;margin-bottom:20px!important;}
+  .menu{grid-template-columns:1fr 1fr!important;gap:8px!important;}
+  .menu button,.menu a{font-size:13px!important;padding:12px 10px!important;border-radius:14px!important;text-align:center!important;}
+  .logout{font-size:13px!important;padding:12px!important;}
+  .main{padding:26px 18px 70px!important;overflow:hidden!important;}
+  .top{display:block!important;margin-bottom:22px!important;}
+  .top span{font-size:12px!important;letter-spacing:.16em!important;}
+  h1{font-size:clamp(34px, 10vw, 44px)!important;line-height:1.12!important;overflow-wrap:break-word!important;}
+  .user{margin-top:16px!important;width:100%!important;max-width:100%!important;padding:10px 12px!important;gap:10px!important;overflow:hidden!important;}
+  .avatar{width:42px!important;height:42px!important;flex:0 0 42px!important;}
+  .user b,.user small{max-width:100%!important;overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important;display:block!important;}
+  .stats{grid-template-columns:1fr!important;gap:14px!important;}
+  .stats div,.panel,.order-card,.file-card,.profile-form{padding:22px!important;border-radius:22px!important;}
+  .stats b{font-size:30px!important;}
+  .grid,.library-grid,.payment-layout,.profile-form{grid-template-columns:1fr!important;gap:16px!important;}
+  .timeline,.timeline.detailed,.timeline.five-step{grid-template-columns:1fr!important;gap:12px!important;}
+  .order-head,.pay-line,.history,.row{display:block!important;}
+  input,textarea,select{font-size:15px!important;padding:13px!important;max-width:100%!important;}
+}
+
+/* === AREN FINAL MOBILE PRODUCT/ACCOUNT PAGE FIX === */
+@media (max-width:760px){
+  html,body{width:100%!important;max-width:100%!important;overflow-x:hidden!important;}
+  *{box-sizing:border-box;max-width:100%;}
+  header,.site-header{width:100%!important;max-width:100%!important;height:auto!important;min-height:78px!important;padding:12px 16px!important;margin:0!important;left:0!important;right:0!important;top:0!important;border-radius:0 0 24px 24px!important;gap:10px!important;}
+  header img,.brand img,.logo{height:58px!important;width:auto!important;max-width:96px!important;object-fit:contain!important;}
+  nav{display:none!important;}
+  .cta,.btn,aside button,.post button,button{min-height:44px!important;padding:0 18px!important;font-size:13.5px!important;white-space:normal!important;}
+  .hero{margin:22px 14px 36px!important;padding:32px 22px!important;display:block!important;grid-template-columns:1fr!important;border-radius:26px!important;overflow:hidden!important;}
+  .hero h1,h1{font-size:clamp(30px,8.6vw,38px)!important;line-height:1.12!important;letter-spacing:-.025em!important;overflow-wrap:break-word!important;word-break:normal!important;}
+  .hero p,p,li{font-size:14.5px!important;line-height:1.62!important;}
+  .visual{display:none!important;}
+  main,.main,.builder,.content{display:block!important;width:100%!important;padding:24px 14px 52px!important;overflow:hidden!important;}
+  .steps,.cards,.two,.four,.five,.grid,.grid-2,.admin-grid,.orders-grid{grid-template-columns:1fr!important;display:grid!important;gap:14px!important;}
+  .steps{padding:0 14px 28px!important;}
+  .steps div,.box,.post,.card,aside,.order-card,.stat{border-radius:22px!important;padding:18px 16px!important;min-width:0!important;overflow:hidden!important;}
+  .builder h2,h2{font-size:clamp(24px,7.2vw,32px)!important;line-height:1.18!important;margin:0 0 22px!important;overflow-wrap:break-word!important;}
+  .builder h3,h3{font-size:18px!important;line-height:1.35!important;margin:24px 0 12px!important;}
+  .card b{font-size:16px!important;line-height:1.3!important;}
+  .card small{font-size:12.5px!important;line-height:1.45!important;}
+  aside{position:static!important;margin-top:18px!important;width:100%!important;}
+  aside h2{font-size:24px!important;}
+  aside div,.total{font-size:14px!important;align-items:center!important;}
+  .total{font-size:18px!important;}
+  input,textarea,select,input[type='file']{width:100%!important;max-width:100%!important;font-size:15px!important;padding:13px 14px!important;border-radius:14px!important;}
+  #thumbs{grid-template-columns:repeat(3,1fr)!important;}
+  #thumbs img{height:78px!important;}
+  .dash,.admin-wrap{display:block!important;}
+  .dash-side,.admin-side{display:block!important;width:100%!important;padding:18px!important;}
+  .dash-main,.admin-main{padding:22px 14px 52px!important;overflow:hidden!important;}
+  .dash-main h1,.admin-main h1{font-size:clamp(30px,9vw,40px)!important;line-height:1.1!important;overflow-wrap:break-word!important;}
+  .admin-table{display:block!important;width:100%!important;overflow-x:auto!important;white-space:nowrap!important;}
+}
+
+
+/* AREN FINAL ACCOUNT/DASHBOARD PHONE FIX */
+@media(max-width:760px){
+  html,body{width:100%!important;max-width:100%!important;overflow-x:hidden!important;}
+  .account-top-nav{width:100%!important;max-width:100%!important;padding:10px 14px!important;gap:8px!important;overflow:hidden!important;}
+  .account-top-nav img{height:54px!important;max-width:94px!important;}
+  .account-pill{font-size:13px!important;padding:10px 14px!important;white-space:nowrap!important;}
+  .sidebar{position:relative!important;width:100%!important;height:auto!important;top:0!important;padding:20px 18px!important;overflow:hidden!important;}
+  .main{margin-left:0!important;width:100%!important;max-width:100%!important;padding:24px 18px 70px!important;overflow:hidden!important;}
+  .top{display:block!important;margin-bottom:20px!important;}
+  .top h1,h1{font-size:clamp(30px,8.4vw,38px)!important;line-height:1.12!important;overflow-wrap:break-word!important;}
+  .user{width:100%!important;margin-top:14px!important;}
+  .stats,.grid,.library-grid,.payment-layout{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important;}
+  .panel,.order-card,.file-card,.profile-form{grid-column:1/-1!important;}
+  .stats div,.panel,.order-card,.file-card,.profile-form{padding:18px 15px!important;border-radius:22px!important;overflow:hidden!important;}
+  .stats b{font-size:28px!important;}
+  .stats span,.panel p,.order-card p{font-size:13px!important;line-height:1.5!important;}
+  .timeline,.timeline.detailed,.timeline.five-step{display:grid!important;grid-template-columns:1fr!important;gap:10px!important;}
+}
+@media(max-width:360px){.stats,.grid,.library-grid,.payment-layout{grid-template-columns:1fr!important;}}

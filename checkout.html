@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="hy">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Վճարում | Aramazd Art</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="site-header">
+  <a class="brand" href="index.html"><img src="assets/logo/aramazd-logo.png" alt="Aramazd Art"></a>
+  <nav class="nav"><a href="index.html">Գլխավոր</a><a href="products.html">Ապրանքներ</a><a href="account/index.html">Իմ սրահը</a><a href="contact.html">Կապ</a></nav>
+</header>
+<main class="checkout-page">
+  <section class="checkout-card" style="max-width:920px">
+    <span class="label">CHECKOUT</span>
+    <h1>Վճարում</h1>
+    <p>Կատարեք նշված վճարումը և կցեք անդորրագիրը։</p>
+    <div id="checkoutInfo">Բեռնվում է...</div>
+
+    <div class="pay-box">
+      <h2>Վճարման տվյալներ</h2>
+      <p><b>Քարտ՝</b> 4454300004304959</p>
+      <p><b>Ստացող՝</b> Արեն Ալավերդյան</p>
+      <p><b>Բանկ՝</b> Սրդշինբանկ</p>
+      <p><b>Idram՝</b> 613508551</p>
+    </div>
+
+    <div class="pay-box">
+      <h2>Անդորրագիր</h2>
+      <label>Կցել վճարման անդորրագիրը
+        <input id="receiptFile" type="file" accept="image/*,application/pdf">
+      </label>
+    </div>
+
+    <div class="pay-box">
+      <h2>Առաքման տվյալներ</h2>
+      <div class="grid-2">
+        <label>Ստացողի անուն<input id="recipientName" placeholder="Անուն Ազգանուն"></label>
+        <label>Հեռախոս<input id="deliveryPhone" placeholder="+374"></label>
+        <label>Քաղաք / գյուղ<input id="deliveryCity" placeholder="օր․ Երևան"></label>
+        <label>Փոստային ինդեքս<input id="postalCode" placeholder="օր․ 0010"></label>
+      </div>
+      <label>Հասցե<input id="deliveryAddress" placeholder="Փողոց, տուն, բնակարան"></label>
+    </div>
+
+    <button class="btn" id="payBtn">Ուղարկել պատվերը</button>
+    <p class="muted">Ադմինը կստուգի անդորրագիրը և կհաստատի վճարումը ձեր անձնական սրահում։</p>
+  </section>
+</main>
+<script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+<script src="js/supabase-config.js"></script>
+<script src="js/checkout.js"></script>
+<script>
+(async function(){
+  const session = await Aramazd.getSession();
+
+  if(!session || !session.user){
+    location.href = 'login.html?next=checkout.html';
+    return;
+  }
+
+  const draft = AramazdCheckout.getDraft();
+  const box = document.getElementById('checkoutInfo');
+  const btn = document.getElementById('payBtn');
+
+  if(!draft){
+    box.innerHTML = '<p>Պատվերի տվյալներ չկան։ Վերադարձեք ապրանքի էջ և նորից սեղմեք պատվիրել։</p>';
+    btn.disabled = true;
+    return;
+  }
+
+  const price = Number(draft.price || 0);
+  const nowPay = price <= 7000 ? price : 5000;
+  const payType = price <= 7000 ? 'Ամբողջական վճարում' : 'Կանխավճար';
+
+  draft.deposit = nowPay;
+  AramazdCheckout.saveDraft(draft);
+
+  box.innerHTML = `
+    <div class="pay-box">
+      <h2>${draft.product || 'Պատվեր'}</h2>
+      <p><b>Ընդհանուր արժեք․</b> ${Aramazd.money(price)}</p>
+      <p><b>${payType} հիմա․</b> ${Aramazd.money(nowPay)}</p>
+      <p><b>Մնացորդ․</b> ${Aramazd.money(Math.max(price - nowPay, 0))}</p>
+    </div>
+  `;
+
+  btn.onclick = async function(){
+    const receiptInput = document.getElementById('receiptFile');
+    const receipt = receiptInput && receiptInput.files ? receiptInput.files[0] : null;
+
+    if(!receipt){
+      alert('Կցեք վճարման անդորրագիրը');
+      return;
+    }
+
+    const recipientName = document.getElementById('recipientName').value.trim();
+    const deliveryPhone = document.getElementById('deliveryPhone').value.trim();
+    const deliveryCity = document.getElementById('deliveryCity').value.trim();
+    const postalCode = document.getElementById('postalCode').value.trim();
+    const deliveryAddress = document.getElementById('deliveryAddress').value.trim();
+
+    if(!recipientName || !deliveryPhone || !deliveryCity || !deliveryAddress){
+      alert('Լրացրեք առաքման հիմնական տվյալները');
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = 'Ուղարկվում է...';
+
+    try{
+      const savedPhotoFiles = await AramazdCheckout.getPendingFiles();
+      const order = await AramazdCheckout.createOrderFromDraft({
+        receiptFile: receipt,
+        photoFiles: savedPhotoFiles,
+        delivery: {
+          recipient_name: recipientName,
+          delivery_phone: deliveryPhone,
+          delivery_city: deliveryCity,
+          delivery_address: deliveryAddress,
+          postal_code: postalCode,
+          delivery_note: ''
+        }
+      });
+
+      alert('Պատվերը ուղարկվեց ✅');
+      location.href = 'account/index.html?order=' + order.id;
+
+    }catch(e){
+      alert('Սխալ։ ' + e.message);
+      btn.disabled = false;
+      btn.textContent = 'Ուղարկել պատվերը';
+    }
+  };
+})();
+</script>
+</body>
+</html>

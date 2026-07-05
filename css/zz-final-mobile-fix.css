@@ -1,0 +1,72 @@
+/* FINAL MOBILE FIX — hero right image + non-broken cards */
+@media (max-width: 768px){
+  html,body{width:100%!important;max-width:100%!important;overflow-x:hidden!important;}
+  *{box-sizing:border-box!important;}
+  .site-header{width:calc(100% - 20px)!important;max-width:calc(100% - 20px)!important;margin:10px auto -92px!important;left:auto!important;right:auto!important;overflow:visible!important;}
+  .site-header .brand img,.brand img{height:58px!important;max-width:96px!important;object-fit:contain!important;}
+  .site-header .actions,.actions{display:flex!important;align-items:center!important;gap:8px!important;margin-left:auto!important;}
+  .site-header .login,.login{display:inline-flex!important;white-space:nowrap!important;font-size:13px!important;padding:0 4px!important;}
+  .site-header .btn.small,.btn.small{min-height:43px!important;padding:0 17px!important;font-size:14px!important;white-space:nowrap!important;}
+  .site-header .menu,.menu{display:inline-flex!important;width:46px!important;height:46px!important;flex:0 0 46px!important;font-size:28px!important;}
+  .nav{display:none!important;}
+  .nav.open,.site-header.open .nav{display:flex!important;position:absolute!important;left:0!important;right:0!important;top:calc(100% + 10px)!important;flex-direction:column!important;background:#fffaf2!important;border-radius:22px!important;padding:10px!important;box-shadow:0 18px 45px rgba(6,38,75,.12)!important;z-index:999!important;}
+
+  /* Desktop feeling on phone: readable text left, Aramazd image visible on right */
+  .hero{
+    min-height:640px!important;
+    padding:150px 22px 56px!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:flex-start!important;
+    overflow:hidden!important;
+    background-image:
+      linear-gradient(90deg,
+        rgba(247,241,230,.99) 0%,
+        rgba(247,241,230,.97) 50%,
+        rgba(247,241,230,.70) 67%,
+        rgba(247,241,230,.20) 84%,
+        rgba(247,241,230,0) 100%),
+      url('../assets/images/hero.webp')!important;
+    background-repeat:no-repeat!important;
+    background-size:100% 100%, auto 100%!important;
+    background-position:left center, 77% center!important;
+  }
+  .hero::before,.hero-overlay{display:none!important;content:none!important;}
+  .hero-content{width:76%!important;max-width:76%!important;position:relative!important;z-index:2!important;padding:0!important;margin:0!important;}
+  .eyebrow{font-size:12px!important;letter-spacing:.18em!important;margin:0 0 12px!important;}
+  .hero h1,.hero-title{font-size:clamp(24px,6.2vw,30px)!important;line-height:1.18!important;letter-spacing:-.025em!important;margin:0!important;word-break:normal!important;overflow-wrap:break-word!important;hyphens:none!important;}
+  .lead{font-size:13.5px!important;line-height:1.58!important;margin:18px 0 22px!important;max-width:92%!important;color:#42526a!important;}
+  .hero .btn,.hero-buttons .btn{min-height:46px!important;padding:0 18px!important;font-size:13.5px!important;white-space:nowrap!important;}
+
+  .section{padding:46px 16px!important;overflow:hidden!important;}
+  .section-head{text-align:left!important;margin:0 0 22px!important;}
+  .section-head h2,.section h2,.page-hero h1,.blue-panel h2{font-size:clamp(24px,7vw,32px)!important;line-height:1.22!important;letter-spacing:-.02em!important;overflow-wrap:break-word!important;}
+
+  /* 2-column clean cards like the good screenshot */
+  .product-grid,.product-grid.large,.process-cards,.benefits-grid,.features-grid,.cards-grid,.info-strip{
+    display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important;width:100%!important;max-width:100%!important;
+  }
+  .product-card,.process-card,.benefit-card,.feature-card,.info-card{
+    min-width:0!important;border-radius:22px!important;padding:14px 12px!important;overflow:hidden!important;
+  }
+  .product-card img,.process-card img{width:74px!important;height:74px!important;object-fit:contain!important;margin:0 auto 14px!important;display:block!important;}
+  .product-card h3,.process-card h3,.benefit-card h3,.feature-card h3{font-size:15px!important;line-height:1.28!important;margin:8px 0 6px!important;overflow-wrap:break-word!important;}
+  .product-card p,.process-card p,.benefit-card p,.feature-card p{font-size:12px!important;line-height:1.45!important;margin:0!important;}
+  .product-card p{display:-webkit-box!important;-webkit-line-clamp:4!important;-webkit-box-orient:vertical!important;overflow:hidden!important;}
+  .product-card .btn,.product-card a.btn{width:100%!important;min-height:38px!important;padding:0 8px!important;font-size:11.8px!important;white-space:normal!important;text-align:center!important;}
+
+  .blue-panel,.contact-grid,.split,.grid-2,.checkout-grid,.account-grid{grid-template-columns:1fr!important;gap:16px!important;}
+  .form,.contact-card,.auth-card,.checkout-card,.pay-box,.wizard-step,.panel,.order-card{width:100%!important;max-width:100%!important;border-radius:22px!important;padding:18px 15px!important;overflow:hidden!important;}
+  input,textarea,select,input[type='file']{width:100%!important;max-width:100%!important;font-size:15px!important;padding:13px 14px!important;border-radius:14px!important;}
+}
+@media (max-width:390px){
+  .hero{background-size:100% 100%, auto 100%!important;background-position:left center, 82% center!important;min-height:620px!important;}
+  .hero-content{width:78%!important;max-width:78%!important;}
+  .hero h1,.hero-title{font-size:clamp(22px,6vw,28px)!important;}
+  .lead{font-size:12.8px!important;max-width:88%!important;}
+  .product-grid,.product-grid.large,.process-cards,.info-strip{gap:10px!important;}
+}
+@media (max-width:340px){
+  .hero-content{width:80%!important;max-width:80%!important;}
+  .hero h1,.hero-title{font-size:21px!important;}
+}
